@@ -14,16 +14,19 @@ if (session_status() === PHP_SESSION_NONE) {
 /**
  * Check if user is logged in
  */
-function isLoggedIn() {
+function isLoggedIn()
+{
     return isset($_SESSION['user_id']);
 }
 
 /**
  * Get current user
  */
-function currentUser() {
+function currentUser()
+{
     global $pdo;
-    if (!isLoggedIn()) return null;
+    if (!isLoggedIn())
+        return null;
     $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
     $stmt->execute([$_SESSION['user_id']]);
     return $stmt->fetch();
@@ -32,7 +35,8 @@ function currentUser() {
 /**
  * Check if user is admin or staff
  */
-function isAdmin() {
+function isAdmin()
+{
     $user = currentUser();
     return $user && in_array($user['role'], ['admin', 'staff']);
 }
@@ -40,8 +44,11 @@ function isAdmin() {
 /**
  * Require login - redirect if not logged in
  */
-function requireLogin($redirectTo = null) {
-    if (!isLoggedIn()) {
+function requireLogin($redirectTo = null)
+{
+    if (!isLoggedIn() || !currentUser()) {
+        if (isLoggedIn())
+            unset($_SESSION['user_id']); // Clear invalid session
         $_SESSION['redirect_after_login'] = $redirectTo ?? $_SERVER['REQUEST_URI'];
         header('Location: ' . BASE_URL . '/login.php');
         exit;
@@ -51,7 +58,8 @@ function requireLogin($redirectTo = null) {
 /**
  * Require admin - redirect if not admin/staff
  */
-function requireAdmin() {
+function requireAdmin()
+{
     requireLogin();
     if (!isAdmin()) {
         header('Location: ' . BASE_URL . '/index.php');
@@ -62,7 +70,8 @@ function requireAdmin() {
 /**
  * Login user (create/update user from OAuth)
  */
-function loginUser($userData) {
+function loginUser($userData)
+{
     global $pdo;
     $stmt = $pdo->prepare("
         SELECT * FROM users WHERE (provider = ? AND provider_id = ?) OR email = ?
@@ -87,7 +96,8 @@ function loginUser($userData) {
             $user['id']
         ]);
         $userId = $user['id'];
-    } else {
+    }
+    else {
         $stmt = $pdo->prepare("
             INSERT INTO users (email, name, picture, provider, provider_id) VALUES (?, ?, ?, ?, ?)
         ");
@@ -108,7 +118,8 @@ function loginUser($userData) {
 /**
  * Logout
  */
-function logout() {
+function logout()
+{
     session_destroy();
     session_start();
 }
