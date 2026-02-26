@@ -1,0 +1,14 @@
+[build]
+  command = "echo 'PHP apps require a special plugin on Netlify'"
+  publish = "."
+
+[[plugins]]
+  package = "netlify-plugin-php"
+
+[build.environment]
+  PHP_VERSION = "8.2"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.php"
+  status = 200
