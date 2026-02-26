@@ -1,0 +1,18 @@
+# Apache config - Cordova Water System Inc.
+# Enable rewrite engine
+RewriteEngine On
+
+# Redirect .html to .php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(about|services|contact|payment|plans|request-service)\.html$ $1.php [L,R=301]
+RewriteRule ^index\.html$ index.php [L,R=301]
+
+# Protect .env file
+<Files ".env">
+    Require all denied
+</Files>
+
+# Protect includes folder
+<IfModule mod_rewrite.c>
+    RewriteRule ^includes/ - [F,L]
+</IfModule>

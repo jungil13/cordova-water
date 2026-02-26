@@ -1,0 +1,44 @@
+<?php require_once __DIR__ . '/includes/auth.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Cordova Water System Inc.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Plus Jakarta Sans']},colors:{primary:{DEFAULT:'#0A4D68',dark:'#083A4D'}}}}}</script>
+</head>
+<body class="font-sans antialiased text-slate-800 bg-slate-50">
+<?php include __DIR__ . '/includes/header.php'; ?>
+<section class="pt-32 pb-20 bg-gradient-to-br from-primary via-primary-dark to-slate-900 relative">
+    <div class="absolute inset-0 bg-[url('<?= BASE_URL ?>/images/background.jpg')] bg-cover bg-center opacity-25"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+    <div class="relative max-w-4xl mx-auto px-4 text-center">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-6">Our Services</h1>
+        <p class="text-lg text-white/90">We offer water purification, delivery, and system maintenance. Our team ensures the highest standards of safety and quality.</p>
+        <div class="flex flex-wrap justify-center gap-4 mt-8">
+            <a href="<?= BASE_URL ?>/request-service.php" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-primary bg-white hover:bg-slate-100">Request Service</a>
+            <a href="<?= BASE_URL ?>/plans.php" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white border-2 border-white/50 hover:bg-white/10">Water Rates</a>
+        </div>
+    </div>
+</section>
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">What We Offer</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100"><h3 class="text-xl font-bold text-slate-900 mb-2">Water Purification</h3><p class="text-slate-600">Clean, treated water meeting safety standards.</p></div>
+            <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100"><h3 class="text-xl font-bold text-slate-900 mb-2">Water Delivery</h3><p class="text-slate-600">Reliable delivery service for your household.</p></div>
+            <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100"><h3 class="text-xl font-bold text-slate-900 mb-2">System Maintenance</h3><p class="text-slate-600">Regular maintenance and repairs.</p></div>
+        </div>
+    </div>
+</section>
+<footer class="bg-slate-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
+        <span class="font-bold text-lg">Cordova Water System Inc.</span>
+        <p class="text-slate-400 text-sm">© 2026 Cordova Water System Inc. All Rights Reserved.</p>
+    </div>
+</footer>
+<script src="<?= BASE_URL ?>/js/main.js"></script>
+</body>
+</html>

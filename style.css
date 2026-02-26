@@ -1,0 +1,397 @@
+/* 
+   Cordova Water System Inc. - Refined Design System 
+   Focus: Mobile Menu, Scroll Animations, Enhanced Interactivity
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+    /* Colors */
+    --primary: #004e7c;
+    --primary-light: #006bb3;
+    --primary-dark: #013453;
+    --accent: #46adee;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --bg-main: #f8fbff;
+    --white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+
+    /* Spacing */
+    --section-padding: 100px 5%;
+    --container-width: 1200px;
+
+    /* Transitions */
+    --transition-smooth: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+}
+
+/* Scroll Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition-smooth);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate {
+    animation: fadeInUp 1s forwards;
+}
+
+/* Header & Navigation */
+header {
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)),
+        url('images/background.jpg') no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Unified Header for subpages */
+body:not(.home-page) header {
+    min-height: 400px;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border);
+    transition: var(--transition-smooth);
+}
+
+.main.scrolled {
+    padding: 15px 8%;
+    background: rgba(0, 78, 124, 0.9);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    height: 55px;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+    transition: var(--transition-smooth);
+}
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: var(--transition-smooth);
+    font-size: 0.95rem;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: var(--transition-smooth);
+}
+
+nav ul li a:hover::after,
+nav ul li.active a::after {
+    transform: scaleX(1);
+}
+
+nav ul li a:hover,
+nav ul li.active a {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 2100;
+}
+
+.menu-toggle span {
+    width: 30px;
+    height: 3px;
+    background: var(--white);
+    border-radius: 10px;
+    transition: var(--transition-smooth);
+}
+
+/* Hero Content */
+.hero-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 5%;
+}
+
+.title h1 {
+    font-size: clamp(2.8rem, 10vw, 5rem);
+    color: var(--white);
+    margin-bottom: 25px;
+    text-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+    letter-spacing: -1px;
+}
+
+.title p {
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 750px;
+    margin-bottom: 45px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.button-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    padding: 16px 36px;
+    text-decoration: none;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: var(--white);
+    box-shadow: 0 8px 25px rgba(70, 173, 238, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px);
+    background: #5bbff7;
+    box-shadow: 0 12px 30px rgba(70, 173, 238, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 2px solid var(--white);
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    background: var(--white);
+    color: var(--primary);
+    transform: translateY(-5px);
+}
+
+/* Sections */
+section {
+    padding: var(--section-padding);
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+/* Contact Page Refinements */
+.contact-info {
+    background: var(--white);
+    border-radius: 30px;
+    padding: 60px;
+    box-shadow: 0 30px 60px rgba(0, 78, 124, 0.12);
+    margin-top: -100px;
+    position: relative;
+    z-index: 10;
+}
+
+.contact-item {
+    background: #fbfdff;
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid #edf2f7;
+    transition: var(--transition-smooth);
+}
+
+.contact-item:hover {
+    background: var(--white);
+    border-color: var(--accent);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 78, 124, 0.08);
+}
+
+/* Payment Refinements */
+.payment-info {
+    border-radius: 30px;
+    padding: 60px 5%;
+}
+
+.payment-option {
+    border: 2px solid #f0f4f8;
+    padding: 40px;
+    background: var(--white);
+}
+
+.payment-option:hover {
+    border-color: var(--accent);
+    transform: translateY(-8px);
+}
+
+/* Request Form Improvements */
+.request-form-container {
+    padding: 50px;
+    border-radius: 30px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    background: var(--white);
+}
+
+/* Footer */
+footer {
+    background: var(--primary-dark);
+    padding: 60px 5%;
+}
+
+.footer-content p {
+    letter-spacing: 0.5px;
+}
+
+/* Responsive Overrides */
+@media (max-width: 991px) {
+    .main {
+        padding: 15px 5%;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-padding: 60px 5%;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: var(--primary-dark);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        transition: 0.4s ease-in-out;
+    }
+
+    nav ul.active {
+        right: 0;
+    }
+
+    nav ul li a {
+        font-size: 1.25rem;
+    }
+
+    .hero-content {
+        padding-top: 50px;
+    }
+
+    .contact-info {
+        margin-top: -50px;
+        padding: 40px 20px;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .title h1 {
+        font-size: 2.2rem;
+    }
+}

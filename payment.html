@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Options - Cordova Water System Inc.</title>
+    <meta name="description" content="Pay your water bill via GCash, Palawan, or cash. Convenient payment options for Cordova Water System Inc.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'] },
+                    colors: { primary: { DEFAULT: '#0A4D68', dark: '#083A4D' }, accent: '#00D9FF' }
+                }
+            }
+        }
+    </script>
+    <style>
+        .reveal { opacity: 0; transform: translateY(24px); transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .hamburger span { transition: all 0.3s ease; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+        #main-header.scrolled .nav-link { color: rgba(255,255,255,0.9); }
+        #main-header.scrolled .nav-link:hover { color: white; background: rgba(255,255,255,0.15); }
+        #main-header.scrolled .nav-link.active { color: white; background: rgba(255,255,255,0.2); }
+        #main-header.scrolled .nav-link-cta { background: white; color: #0A4D68; }
+        #main-header.scrolled .brand-name { color: white !important; }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-slate-800 bg-slate-50">
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 [&.scrolled]:!bg-primary [&.scrolled]:border-primary/30">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center gap-2">
+                    <img src="images/logo.png" alt="Cordova Water" class="h-12" onerror="this.style.display='none'">
+                    <span class="brand-name text-xl font-bold text-primary">Cordova Water</span>
+                </a>
+                <ul class="hidden md:flex items-center gap-1">
+                    <li><a href="index.html" class="nav-link px-4 py-2 rounded-lg font-medium text-slate-600 hover:text-primary hover:bg-slate-100">Home</a></li>
+                    <li><a href="about.html" class="nav-link px-4 py-2 rounded-lg font-medium text-slate-600 hover:text-primary hover:bg-slate-100">About Us</a></li>
+                    <li><a href="services.html" class="nav-link px-4 py-2 rounded-lg font-medium text-slate-600 hover:text-primary hover:bg-slate-100">Services</a></li>
+                    <li><a href="contact.html" class="nav-link px-4 py-2 rounded-lg font-medium text-slate-600 hover:text-primary hover:bg-slate-100">Contact</a></li>
+                    <li><a href="payment.html" class="nav-link active px-4 py-2 rounded-lg font-medium text-primary bg-primary/10">Payment</a></li>
+                    <li><a href="request-service.html" class="nav-link-cta ml-2 px-5 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary-dark">Request Service</a></li>
+                </ul>
+                <button id="mobile-menu-btn" class="md:hidden hamburger flex flex-col gap-1.5 p-2 rounded-lg" aria-label="Menu">
+                    <span class="block w-6 h-0.5 bg-slate-700 rounded"></span>
+                    <span class="block w-6 h-0.5 bg-slate-700 rounded"></span>
+                    <span class="block w-6 h-0.5 bg-slate-700 rounded"></span>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-nav" class="hidden md:hidden border-t border-slate-200 bg-white/95">
+            <ul class="px-4 py-4 space-y-1">
+                <li><a href="index.html" class="block px-4 py-3 rounded-lg font-medium">Home</a></li>
+                <li><a href="about.html" class="block px-4 py-3 rounded-lg font-medium">About Us</a></li>
+                <li><a href="services.html" class="block px-4 py-3 rounded-lg font-medium">Services</a></li>
+                <li><a href="contact.html" class="block px-4 py-3 rounded-lg font-medium">Contact</a></li>
+                <li><a href="payment.html" class="block px-4 py-3 rounded-lg font-medium text-primary bg-primary/10">Payment</a></li>
+                <li><a href="request-service.html" class="block mx-4 mt-4 py-3.5 rounded-xl font-semibold text-center text-white bg-primary">Request Service</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="pt-32 pb-16 bg-gradient-to-br from-primary via-primary-dark to-slate-900 relative">
+        <div class="absolute inset-0 bg-[url('images/background.jpg')] bg-cover bg-center opacity-25"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div class="relative max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-6 reveal">Payment Options</h1>
+            <p class="text-lg text-white/90 reveal">Choose your preferred payment method. We accept online and cash payments for your convenience.</p>
+        </div>
+    </section>
+
+    <section class="py-24 -mt-16 relative z-10">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="reveal bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-slate-100 hover:border-primary/20 transition-colors">
+                    <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-2">Online Payment</h2>
+                    <p class="text-slate-600 mb-6">Pay through GCash, Palawan, or other online methods. Scan the QR codes below.</p>
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <div class="text-center">
+                            <img src="images/palawan.png" alt="Palawan Pay" class="w-36 h-36 object-contain rounded-xl border border-slate-200 mx-auto mb-2" onerror="this.parentElement.innerHTML='<div class=\'w-36 h-36 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 text-sm\'>Palawan QR</div>'">
+                            <span class="text-sm font-medium text-slate-600">Palawan</span>
+                        </div>
+                        <div class="text-center">
+                            <img src="images/gcash.jpg" alt="GCash" class="w-36 h-36 object-contain rounded-xl border border-slate-200 mx-auto mb-2" onerror="this.parentElement.innerHTML='<div class=\'w-36 h-36 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 text-sm\'>GCash QR</div>'">
+                            <span class="text-sm font-medium text-slate-600">GCash</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-slate-100 hover:border-primary/20 transition-colors">
+                    <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-2">Cash Payment</h2>
+                    <p class="text-slate-600 mb-6">For cash payments, visit our office or contact us for further instructions on payment centers.</p>
+                    <a href="contact.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white bg-primary hover:bg-primary-dark transition-colors">
+                        Contact for Instructions
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
+            <span class="font-bold text-lg">Cordova Water System Inc.</span>
+            <p class="text-slate-400 text-sm">© 2026 Cordova Water System Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

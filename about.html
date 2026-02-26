@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Cordova Water System Inc.</title>
+    <meta name="description" content="Learn about Cordova Water System Inc. - Our mission to provide clean, safe water to the Cordova community.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'] },
+                    colors: { primary: { DEFAULT: '#0A4D68', dark: '#083A4D', light: '#088395' }, accent: '#00D9FF' }
+                }
+            }
+        }
+    </script>
+    <style>
+        .reveal { opacity: 0; transform: translateY(24px); transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .hamburger span { transition: all 0.3s ease; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+        html { scroll-behavior: smooth; }
+        #main-header.scrolled .nav-link { color: rgba(255,255,255,0.9); }
+        #main-header.scrolled .nav-link:hover { color: white; background: rgba(255,255,255,0.15); }
+        #main-header.scrolled .nav-link.active { color: white; background: rgba(255,255,255,0.2); }
+        #main-header.scrolled .nav-link-cta { background: white; color: #0A4D68; }
+        #main-header.scrolled .brand-name { color: white !important; }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-slate-800 bg-slate-50">
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 [&.scrolled]:!bg-primary [&.scrolled]:border-primary/30">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <img src="images/logo.png" alt="Cordova Water System Inc." class="h-12" onerror="this.style.display='none'">
+                    <span class="brand-name text-xl font-bold text-primary">Cordova Water</span>
+                </a>
+                <ul class="hidden md:flex items-center gap-1">
+                    <li><a href="index.html" class="nav-link px-4 py-2 rounded-lg font-medium text-slate-600 hover:text-primary hover:bg-slate-100">Home</a></li>
+                    <li><a href="about.html" class="nav-link active px-4 py-2 rounded-lg font-medium text-primary bg-primary/10">About Us</a></li>
+                    <li><a href="services.html" class="nav-link px-4 py-2 rounded-lg font-medium text-slate-600 hover:text-primary hover:bg-slate-100">Services</a></li>
+                    <li><a href="contact.html" class="nav-link px-4 py-2 rounded-lg font-medium text-slate-600 hover:text-primary hover:bg-slate-100">Contact</a></li>
+                    <li><a href="payment.html" class="nav-link px-4 py-2 rounded-lg font-medium text-slate-600 hover:text-primary hover:bg-slate-100">Payment</a></li>
+                    <li><a href="request-service.html" class="nav-link-cta ml-2 px-5 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary-dark">Request Service</a></li>
+                </ul>
+                <button id="mobile-menu-btn" class="md:hidden hamburger flex flex-col gap-1.5 p-2 rounded-lg" aria-label="Toggle menu">
+                    <span class="block w-6 h-0.5 bg-slate-700 rounded"></span>
+                    <span class="block w-6 h-0.5 bg-slate-700 rounded"></span>
+                    <span class="block w-6 h-0.5 bg-slate-700 rounded"></span>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-nav" class="hidden md:hidden border-t border-slate-200 bg-white/95">
+            <ul class="px-4 py-4 space-y-1">
+                <li><a href="index.html" class="block px-4 py-3 rounded-lg font-medium">Home</a></li>
+                <li><a href="about.html" class="block px-4 py-3 rounded-lg font-medium text-primary bg-primary/10">About Us</a></li>
+                <li><a href="services.html" class="block px-4 py-3 rounded-lg font-medium">Services</a></li>
+                <li><a href="contact.html" class="block px-4 py-3 rounded-lg font-medium">Contact</a></li>
+                <li><a href="payment.html" class="block px-4 py-3 rounded-lg font-medium">Payment</a></li>
+                <li><a href="request-service.html" class="block mx-4 mt-4 py-3.5 rounded-xl font-semibold text-center text-white bg-primary">Request Service</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="pt-32 pb-20 bg-gradient-to-br from-primary via-primary-dark to-slate-900 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('images/background.jpg')] bg-cover bg-center opacity-25"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div class="relative max-w-4xl mx-auto px-4 text-center">
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-6 reveal">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="text-white/90 text-sm font-medium">Our Story</span>
+            </span>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-6 reveal">About Cordova Water System</h1>
+            <p class="text-lg text-white/90 max-w-2xl mx-auto reveal">We provide high-quality water services with an emphasis on sustainability and innovation. Our mission is to ensure every household in Cordova has access to clean, safe, and affordable water.</p>
+            <div class="flex flex-wrap justify-center gap-4 mt-8 reveal">
+                <a href="services.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-primary bg-white hover:bg-slate-100">Our Services</a>
+                <a href="contact.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white border-2 border-white/50 hover:bg-white/10">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <section class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Our Mission</h2>
+                    <p class="text-slate-600 leading-relaxed">Delivering reliable, clean water to every household in Cordova while maintaining the highest standards of service and sustainability. We're committed to building a healthier community through access to safe water.</p>
+                </div>
+                <div class="reveal">
+                    <div class="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Our Vision</h2>
+                    <p class="text-slate-600 leading-relaxed">To be the most trusted water service provider in Cordova, known for excellence, innovation, and unwavering dedication to community well-being.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <img src="images/logo.png" alt="Logo" class="h-10 opacity-90" onerror="this.style.display='none'">
+                <span class="font-bold text-lg">Cordova Water System Inc.</span>
+            </div>
+            <p class="text-slate-400 text-sm">© 2026 Cordova Water System Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

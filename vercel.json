@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "*.php",
+      "use": "vercel-php@0.7.0"
+    },
+    {
+      "src": "admin/*.php",
+      "use": "vercel-php@0.7.0"
+    },
+    {
+      "src": "auth/*.php",
+      "use": "vercel-php@0.7.0"
+    },
+    {
+      "src": "dashboard/*.php",
+      "use": "vercel-php@0.7.0"
+    }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/index.php" },
+    { "src": "/admin", "dest": "/admin/index.php" },
+    { "src": "/admin/(.*)", "dest": "/admin/$1" },
+    { "src": "/dashboard", "dest": "/dashboard/index.php" },
+    { "src": "/auth/(.*)", "dest": "/auth/$1" },
+    { "src": "/(.*)\\.php", "dest": "/$1.php" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ],
+  "env": {
+    "BASE_URL": "@base_url"
+  }
+}
