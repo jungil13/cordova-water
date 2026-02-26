@@ -12,7 +12,7 @@
 <body class="font-sans antialiased text-slate-800 bg-slate-50">
 <?php include __DIR__ . '/includes/header.php'; ?>
 <section class="pt-32 pb-20 bg-gradient-to-br from-primary via-primary-dark to-slate-900 relative">
-    <div class="absolute inset-0 bg-[url('<?images/background.jpg')] bg-cover bg-center opacity-25"></div>
+    <div class="absolute inset-0 bg-[url('images/background.jpg')] bg-cover bg-center opacity-25"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
     <div class="relative max-w-4xl mx-auto px-4 text-center">
         <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-6">Our Services</h1>

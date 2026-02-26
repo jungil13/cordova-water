@@ -12,7 +12,7 @@
 <body class="font-sans antialiased text-slate-800 bg-slate-50">
 <?php include __DIR__ . '/includes/header.php'; ?>
 <section class="pt-32 pb-16 bg-gradient-to-br from-primary via-primary-dark to-slate-900 relative">
-    <div class="absolute inset-0 bg-[url('<?images/background.jpg')] bg-cover bg-center opacity-25"></div>
+    <div class="absolute inset-0 bg-[url('images/background.jpg')] bg-cover bg-center opacity-25"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
     <div class="relative max-w-4xl mx-auto px-4 text-center">
         <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-6">Payment Options</h1>
@@ -22,7 +22,7 @@
 <section class="py-24 -mt-16 relative z-10">
     <div class="max-w-5xl mx-auto px-4">
         <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-slate-100"><h2 class="text-2xl font-bold text-slate-900 mb-2">Online Payment</h2><p class="text-slate-600 mb-6">Pay through GCash or Palawan. Scan the QR codes.</p><div class="flex gap-4 justify-center"><img src="<?images/palawan.png" alt="Palawan" class="w-36 h-36 object-contain rounded-xl border" onerror="this.style.display='none'"><img src="<?images/gcash.jpg" alt="GCash" class="w-36 h-36 object-contain rounded-xl border" onerror="this.style.display='none'"></div></div>
+            <div class="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-slate-100"><h2 class="text-2xl font-bold text-slate-900 mb-2">Online Payment</h2><p class="text-slate-600 mb-6">Pay through GCash or Palawan. Scan the QR codes.</p><div class="flex gap-4 justify-center"><img src="images/palawan.png" alt="Palawan" class="w-36 h-36 object-contain rounded-xl border" onerror="this.style.display='none'"><img src="images/gcash.jpg" alt="GCash" class="w-36 h-36 object-contain rounded-xl border" onerror="this.style.display='none'"></div></div>
             <div class="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-slate-100"><h2 class="text-2xl font-bold text-slate-900 mb-2">Cash Payment</h2><p class="text-slate-600 mb-6">Visit our office or contact us for payment centers.</p><a href="<?= BASE_URL ?>/contact.php" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white bg-primary hover:bg-primary-dark">Contact for Instructions</a></div>
         </div>
     </div>

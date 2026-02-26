@@ -1,4 +1,4 @@
-ï»¿<?php
+<?php
 require_once __DIR__ . '/includes/auth.php';
 
 if (isLoggedIn()) {
@@ -81,11 +81,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Password</label>
-                        <input type="password" name="password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢">
+                        <input type="password" name="password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="••••••••">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Confirm</label>
-                        <input type="password" name="confirm_password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢">
+                        <input type="password" name="confirm_password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="••••••••">
                     </div>
                 </div>
                 <button type="submit" class="w-full py-4 px-4 rounded-xl font-bold text-white bg-primary hover:bg-primary-dark shadow-lg shadow-primary/30 mt-4 transition-all transform active:scale-[0.98]">

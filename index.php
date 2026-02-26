@@ -17,7 +17,7 @@ require_once __DIR__ . '/includes/auth.php';
 <?php include __DIR__ . '/includes/header.php'; ?>
 
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary via-primary-dark to-slate-900 hero-pattern">
-    <div class="absolute inset-0 bg-[url('<?images/background.jpg')] bg-cover bg-center opacity-30"></div>
+    <div class="absolute inset-0 bg-[url('images/background.jpg')] bg-cover bg-center opacity-30"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-20">
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
