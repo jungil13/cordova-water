@@ -32,7 +32,8 @@ function currentUser()
     try {
         $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
         $stmt->execute([$_SESSION['user_id']]);
-        return $stmt->fetch();
+        $user = $stmt->fetch();
+        return $user ?: null; // Ensure null if fetch fails or returns false
     }
     catch (PDOException $e) {
         return null;
@@ -44,7 +45,11 @@ function currentUser()
  */
 function requireLogin()
 {
-    if (!isLoggedIn()) {
+    if (!isLoggedIn() || currentUser() === null) {
+        // Clear session if logged in but user record is missing
+        if (isLoggedIn()) {
+            $_SESSION = [];
+        }
         header('Location: ' . BASE_URL . '/login.php');
         exit;
     }
