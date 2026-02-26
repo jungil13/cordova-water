@@ -28,7 +28,15 @@ function env($key, $default = null)
 $proto = $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http");
 $host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'] ?? 'localhost';
 $detectedBase = $proto . "://" . $host;
-define('BASE_URL', env('BASE_URL', $detectedBase));
+
+// Use detected base if ENV is localhost or empty
+$envBase = env('BASE_URL');
+if (!$envBase || strpos($envBase, 'localhost') !== false) {
+    define('BASE_URL', $detectedBase);
+}
+else {
+    define('BASE_URL', $envBase);
+}
 
 // Database
 define('DB_HOST', env('DB_HOST', 'localhost'));
