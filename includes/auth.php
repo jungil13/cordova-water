@@ -68,51 +68,49 @@ function requireAdmin()
 }
 
 /**
- * Login user (create/update user from OAuth)
+ * Login user (Manual email/password)
  */
-function loginUser($userData)
+function loginUser($email, $password)
 {
     global $pdo;
-    $stmt = $pdo->prepare("
-        SELECT * FROM users WHERE (provider = ? AND provider_id = ?) OR email = ?
-    ");
-    $stmt->execute([
-        $userData['provider'],
-        $userData['provider_id'] ?? '',
-        $userData['email']
-    ]);
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->execute([$email]);
     $user = $stmt->fetch();
 
-    if ($user) {
-        $stmt = $pdo->prepare("
-            UPDATE users SET name=?, picture=?, provider=?, provider_id=?, updated_at=NOW()
-            WHERE id=?
-        ");
-        $stmt->execute([
-            $userData['name'],
-            $userData['picture'] ?? null,
-            $userData['provider'],
-            $userData['provider_id'] ?? null,
-            $user['id']
-        ]);
-        $userId = $user['id'];
+    if ($user && password_verify($password, $user['password_hash'])) {
+        $_SESSION['user_id'] = $user['id'];
+        return $user;
     }
-    else {
-        $stmt = $pdo->prepare("
-            INSERT INTO users (email, name, picture, provider, provider_id) VALUES (?, ?, ?, ?, ?)
-        ");
-        $stmt->execute([
-            $userData['email'],
-            $userData['name'],
-            $userData['picture'] ?? null,
-            $userData['provider'],
-            $userData['provider_id'] ?? null
-        ]);
-        $userId = $pdo->lastInsertId();
+    return false;
+}
+
+/**
+ * Register user (Manual email/password)
+ */
+function registerUser($name, $email, $password)
+{
+    global $pdo;
+
+    // Check if email already exists
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    if ($stmt->fetch()) {
+        return ['error' => 'Email already registered.'];
     }
 
-    $_SESSION['user_id'] = $userId;
-    return $userId;
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+    try {
+        $stmt = $pdo->prepare("
+            INSERT INTO users (name, email, password_hash, provider, role) 
+            VALUES (?, ?, ?, 'local', 'user')
+        ");
+        $stmt->execute([$name, $email, $passwordHash]);
+        return ['success' => true, 'id' => $pdo->lastInsertId()];
+    }
+    catch (PDOException $e) {
+        return ['error' => 'Registration failed: ' . $e->getMessage()];
+    }
 }
 
 /**

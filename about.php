@@ -12,7 +12,7 @@
 <body class="font-sans antialiased text-slate-800 bg-slate-50">
 <?php include __DIR__ . '/includes/header.php'; ?>
 <section class="pt-32 pb-20 bg-gradient-to-br from-primary via-primary-dark to-slate-900 relative">
-    <div class="absolute inset-0 bg-[url('<?= BASE_URL ?>/images/background.jpg')] bg-cover bg-center opacity-25"></div>
+    <div class="absolute inset-0 bg-[url('<?images/background.jpg')] bg-cover bg-center opacity-25"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
     <div class="relative max-w-4xl mx-auto px-4 text-center">
         <p class="text-accent font-semibold text-sm uppercase tracking-wider mb-2">A Subsidiary of Abejo Waters Corp.</p>
@@ -38,28 +38,28 @@
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="text-center">
                 <div class="relative w-20 h-20 rounded-full mx-auto mb-3 overflow-hidden bg-primary/10 ring-2 ring-primary/20">
-                    <img src="<?= BASE_URL ?>/images/team/admin-thumb.jpg" alt="Admin" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden');">
+                    <img src="<?images/team/admin-thumb.jpg" alt="Admin" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden');">
                     <span class="absolute inset-0 hidden flex items-center justify-center text-primary font-bold text-xl">A</span>
                 </div>
                 <h3 class="font-bold text-slate-900">Admin</h3>
             </div>
             <div class="text-center">
                 <div class="relative w-20 h-20 rounded-full mx-auto mb-3 overflow-hidden bg-primary/10 ring-2 ring-primary/20">
-                    <img src="<?= BASE_URL ?>/images/team/billing-thumb.jpg" alt="Billing" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden');">
+                    <img src="<?images/team/billing-thumb.jpg" alt="Billing" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden');">
                     <span class="absolute inset-0 hidden flex items-center justify-center text-primary font-bold text-xl">B</span>
                 </div>
                 <h3 class="font-bold text-slate-900">Billing</h3>
             </div>
             <div class="text-center">
                 <div class="relative w-20 h-20 rounded-full mx-auto mb-3 overflow-hidden bg-primary/10 ring-2 ring-primary/20">
-                    <img src="<?= BASE_URL ?>/images/team/maintenance-thumb.jpg" alt="Maintenance" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden');">
+                    <img src="<?images/team/maintenance-thumb.jpg" alt="Maintenance" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden');">
                     <span class="absolute inset-0 hidden flex items-center justify-center text-primary font-bold text-xl">M</span>
                 </div>
                 <h3 class="font-bold text-slate-900">Maintenance</h3>
             </div>
             <div class="text-center">
                 <div class="relative w-20 h-20 rounded-full mx-auto mb-3 overflow-hidden bg-primary/10 ring-2 ring-primary/20">
-                    <img src="<?= BASE_URL ?>/images/team/manager-thumb.jpg" alt="Manager" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden');">
+                    <img src="<?images/team/manager-thumb.jpg" alt="Manager" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden');">
                     <span class="absolute inset-0 hidden flex items-center justify-center text-primary font-bold text-xl">M</span>
                 </div>
                 <h3 class="font-bold text-slate-900">Manager</h3>
