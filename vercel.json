@@ -19,15 +19,33 @@
     }
   ],
   "routes": [
-    { "src": "/", "dest": "/index.php" },
-    { "src": "/admin", "dest": "/admin/index.php" },
-    { "src": "/admin/(.*)", "dest": "/admin/$1" },
-    { "src": "/dashboard", "dest": "/dashboard/index.php" },
-    { "src": "/auth/(.*)", "dest": "/auth/$1" },
-    { "src": "/(.*)\\.php", "dest": "/$1.php" },
-    { "src": "/(.*)", "dest": "/$1" }
-  ],
-  "env": {
-    "BASE_URL": "@base_url"
-  }
+    {
+      "src": "/",
+      "dest": "/index.php"
+    },
+    {
+      "src": "/admin",
+      "dest": "/admin/index.php"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "/admin/$1"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/dashboard/index.php"
+    },
+    {
+      "src": "/auth/(.*)",
+      "dest": "/auth/$1"
+    },
+    {
+      "src": "/(.*)\\.php",
+      "dest": "/$1.php"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
 }
