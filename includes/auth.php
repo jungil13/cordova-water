@@ -86,3 +86,54 @@ function logout()
     }
     session_destroy();
 }
+
+/**
+ * Register a new user
+ */
+function registerUser($name, $email, $password)
+{
+    global $pdo;
+
+    // Check if email already exists
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    if ($stmt->fetch()) {
+        return ['error' => 'Email already registered.'];
+    }
+
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+    try {
+        $stmt = $pdo->prepare("INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)");
+        $stmt->execute([$name, $email, $passwordHash]);
+        return ['success' => true];
+    }
+    catch (PDOException $e) {
+        return ['error' => 'Registration failed. Please try again.'];
+    }
+}
+
+/**
+ * Log in a user
+ */
+function loginUser($email, $password)
+{
+    global $pdo;
+
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+
+        if ($user && password_verify($password, $user['password_hash'])) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_role'] = $user['role'];
+            return $user;
+        }
+    }
+    catch (PDOException $e) {
+        return false;
+    }
+
+    return false;
+}
