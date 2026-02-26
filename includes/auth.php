@@ -1,8 +1,8 @@
 <?php
 // Start session at the absolute top to prevent "headers already sent"
 if (session_status() === PHP_SESSION_NONE) {
-    // Default session lifetime if config not loaded yet
-    session_set_cookie_params(['lifetime' => 604800]);
+    // Default session lifetime (7 days)
+    session_set_cookie_params(['lifetime' => 604800, 'path' => '/', 'samesite' => 'Lax']);
     session_start();
 }
 
@@ -56,7 +56,7 @@ function requireLogin()
 function isAdmin()
 {
     $user = currentUser();
-    return $user && $user['role'] === 'admin';
+    return $user && ($user['role'] === 'admin' || $user['role'] === 'staff');
 }
 
 /**
