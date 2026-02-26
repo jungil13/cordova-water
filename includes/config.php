@@ -24,8 +24,9 @@ function env($key, $default = null)
     return $val !== false ? $val : $default;
 }
 
-// Base URL (no trailing slash)
-define('BASE_URL', env('BASE_URL', 'http://localhost:8000'));
+// Base URL Detection
+$detectedBase = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . ($_SERVER['HTTP_HOST'] ?? 'localhost');
+define('BASE_URL', env('BASE_URL', $detectedBase));
 
 // Database
 define('DB_HOST', env('DB_HOST', 'localhost'));
