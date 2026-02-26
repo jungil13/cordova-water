@@ -24,8 +24,10 @@ function env($key, $default = null)
     return $val !== false ? $val : $default;
 }
 
-// Base URL Detection
-$detectedBase = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . ($_SERVER['HTTP_HOST'] ?? 'localhost');
+// Base URL Detection (Handles Local & Vercel Proxy)
+$proto = $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http");
+$host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'] ?? 'localhost';
+$detectedBase = $proto . "://" . $host;
 define('BASE_URL', env('BASE_URL', $detectedBase));
 
 // Database
