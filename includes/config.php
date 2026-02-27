@@ -35,11 +35,14 @@ function env($key, $default = null)
 }
 
 // App Settings
+// App Settings
 $default_base = 'http://localhost:8000';
 $socket_base = 'http://localhost:3000';
 
-if (isset($_SERVER['HTTP_HOST'])) {
-    $host = $_SERVER['HTTP_HOST'];
+$host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'] ?? null;
+
+if ($host) {
+    // Determine Protocol
     $isHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ||
         (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
         (strpos($host, 'devtunnels.ms') !== false); // DevTunnels always use HTTPS
@@ -61,8 +64,9 @@ if (isset($_SERVER['HTTP_HOST'])) {
     }
 }
 
-define('BASE_URL', env('BASE_URL', $default_base));
-define('SOCKET_URL', env('SOCKET_URL', $socket_base));
+// Override with env if explicitly set, otherwise use dynamic detection
+define('BASE_URL', getenv('BASE_URL') ?: ($_ENV['BASE_URL'] ?? $default_base));
+define('SOCKET_URL', getenv('SOCKET_URL') ?: ($_ENV['SOCKET_URL'] ?? $socket_base));
 
 // Database
 define('DB_HOST', env('DB_HOST', 'localhost'));
