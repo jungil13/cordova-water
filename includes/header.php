@@ -8,7 +8,7 @@ $user = currentUser();
         <div class="flex items-center justify-between h-20">
             <a href="<?= rtrim(BASE_URL,'/') ?>/" class="flex items-center gap-2 group">
                 <img src="<?= BASE_URL ?>/images/logo.png" alt="Cordova Water" class="h-12" onerror="this.style.display='none'">
-                <span class="brand-name text-xl font-bold text-primary">Cordova Water</span>
+                <span class="brand-name text-xl font-bold text-primary">CWSI</span>
             </a>
 
             <ul class="hidden md:flex items-center gap-1">
