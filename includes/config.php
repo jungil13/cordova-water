@@ -35,8 +35,34 @@ function env($key, $default = null)
 }
 
 // App Settings
-define('BASE_URL', env('BASE_URL', 'http://localhost:8000'));
-define('SOCKET_URL', env('SOCKET_URL', 'http://localhost:3000'));
+$default_base = 'http://localhost:8000';
+$socket_base = 'http://localhost:3000';
+
+if (isset($_SERVER['HTTP_HOST'])) {
+    $host = $_SERVER['HTTP_HOST'];
+    $isHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ||
+        (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
+        (strpos($host, 'devtunnels.ms') !== false); // DevTunnels always use HTTPS
+
+    $protocol = $isHttps ? 'https://' : 'http://';
+    $default_base = $protocol . $host;
+
+    // Auto-detect socket URL for DevTunnels or localhost port differences
+    if (preg_match('/\-8000\.([a-z0-9\-]+\.devtunnels\.ms)$/', $host)) {
+        $socket_host = str_replace('-8000.', '-3000.', $host);
+        $socket_base = $protocol . $socket_host;
+    }
+    elseif (strpos($host, ':8000') !== false) {
+        $socket_host = str_replace(':8000', ':3000', $host);
+        $socket_base = $protocol . $socket_host;
+    }
+    else {
+        $socket_base = $protocol . $host; // Fallback
+    }
+}
+
+define('BASE_URL', env('BASE_URL', $default_base));
+define('SOCKET_URL', env('SOCKET_URL', $socket_base));
 
 // Database
 define('DB_HOST', env('DB_HOST', 'localhost'));
