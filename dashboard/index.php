@@ -1,24 +1,28 @@
 <?php
 require_once __DIR__ . '/../includes/auth.php';
-requireLogin();
-
-$user = currentUser();
 require_once __DIR__ . '/../includes/db.php';
 
-// User's service requests
-$stmt = $pdo->prepare("SELECT * FROM service_requests WHERE user_id = ? ORDER BY created_at DESC LIMIT 10");
-$stmt->execute([$user['id']]);
-$requests = $stmt->fetchAll();
+// On Vercel, PHP sessions are not reliable between requests, so we avoid
+// hard redirects here and instead render a generic dashboard for guests.
+$user = currentUser();
+$requests = $billing = $payments = [];
 
-// User's billing
-$stmt = $pdo->prepare("SELECT * FROM billing WHERE user_id = ? ORDER BY period_end DESC LIMIT 5");
-$stmt->execute([$user['id']]);
-$billing = $stmt->fetchAll();
+if ($user) {
+    // User's service requests
+    $stmt = $pdo->prepare("SELECT * FROM service_requests WHERE user_id = ? ORDER BY created_at DESC LIMIT 10");
+    $stmt->execute([$user['id']]);
+    $requests = $stmt->fetchAll();
 
-// User's payments
-$stmt = $pdo->prepare("SELECT p.*, b.period_end FROM payments p LEFT JOIN billing b ON p.billing_id = b.id WHERE p.user_id = ? ORDER BY p.created_at DESC LIMIT 5");
-$stmt->execute([$user['id']]);
-$payments = $stmt->fetchAll();
+    // User's billing
+    $stmt = $pdo->prepare("SELECT * FROM billing WHERE user_id = ? ORDER BY period_end DESC LIMIT 5");
+    $stmt->execute([$user['id']]);
+    $billing = $stmt->fetchAll();
+
+    // User's payments
+    $stmt = $pdo->prepare("SELECT p.*, b.period_end FROM payments p LEFT JOIN billing b ON p.billing_id = b.id WHERE p.user_id = ? ORDER BY p.created_at DESC LIMIT 5");
+    $stmt->execute([$user['id']]);
+    $payments = $stmt->fetchAll();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,8 +40,12 @@ $payments = $stmt->fetchAll();
 <section class="pt-32 pb-24">
     <div class="max-w-6xl mx-auto px-4">
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-slate-900">Welcome back, <?= htmlspecialchars(explode(' ', $user['name'])[0]) ?>!</h1>
-            <p class="text-slate-600 mt-1">Manage your water service and billing</p>
+            <h1 class="text-3xl font-bold text-slate-900">
+                <?= $user ? 'Welcome back, ' . htmlspecialchars(explode(' ', $user['name'])[0]) . '!' : 'Customer Dashboard' ?>
+            </h1>
+            <p class="text-slate-600 mt-1">
+                <?= $user ? 'Manage your water service and billing.' : 'Sign in to see your requests, billing, and payments.' ?>
+            </p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6 mb-12">
