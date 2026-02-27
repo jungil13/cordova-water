@@ -14,7 +14,13 @@ $inProgressRequests = $stmt->fetchColumn();
 $stmt = $pdo->query("SELECT COUNT(*) FROM billing WHERE status = 'unpaid'");
 $unpaidBills = $stmt->fetchColumn();
 
-$stmt = $pdo->query("SELECT COALESCE(SUM(amount), 0) FROM payments WHERE status = 'confirmed' AND MONTH(created_at) = MONTH(CURRENT_DATE())");
+$stmt = $pdo->query("
+    SELECT COALESCE(SUM(amount), 0)
+    FROM payments
+    WHERE status = 'confirmed'
+      AND MONTH(created_at) = MONTH(CURRENT_DATE())
+      AND YEAR(created_at) = YEAR(CURRENT_DATE())
+");
 $monthlyRevenue = $stmt->fetchColumn();
 
 $stmt = $pdo->query("SELECT * FROM service_requests ORDER BY created_at DESC LIMIT 5");
