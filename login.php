@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+// Login entrypoint - no output before this PHP block to keep headers/redirects safe.
 require_once __DIR__ . '/includes/auth.php';
 require_once __DIR__ . '/includes/db.php';
 
