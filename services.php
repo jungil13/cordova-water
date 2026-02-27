@@ -28,7 +28,6 @@
         <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">What We Offer</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100"><h3 class="text-xl font-bold text-slate-900 mb-2">Water Purification</h3><p class="text-slate-600">Clean, treated water meeting safety standards.</p></div>
-            <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100"><h3 class="text-xl font-bold text-slate-900 mb-2">Water Delivery</h3><p class="text-slate-600">Reliable delivery service for your household.</p></div>
             <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100"><h3 class="text-xl font-bold text-slate-900 mb-2">System Maintenance</h3><p class="text-slate-600">Regular maintenance and repairs.</p></div>
         </div>
     </div>
