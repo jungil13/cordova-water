@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Shared header - include after auth if needed
 $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 $user = currentUser();
@@ -6,26 +6,26 @@ $user = currentUser();
 <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 [&.scrolled]:!bg-primary [&.scrolled]:border-primary/30">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
-            <a href="<?= rtrim(BASE_URL,'/') ?>/" class="flex items-center gap-2 group">
-                <img src="<?= BASE_URL ?>/images/logo.png" alt="Cordova Water" class="h-12" onerror="this.style.display='none'">
+            <a href="/" class="flex items-center gap-2 group">
+                <img src="/images/logo.png" alt="Cordova Water" class="h-12" onerror="this.style.display='none'">
                 <span class="brand-name text-xl font-bold text-primary">CWSI</span>
             </a>
 
             <ul class="hidden md:flex items-center gap-1">
-                <li><a href="<?= BASE_URL ?>/index.php" class="nav-link px-4 py-2 rounded-lg font-medium <?= $currentPage === 'index' ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">Home</a></li>
-                <li><a href="<?= BASE_URL ?>/about.php" class="nav-link px-4 py-2 rounded-lg font-medium <?= $currentPage === 'about' ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">About</a></li>
-                <li><a href="<?= BASE_URL ?>/services.php" class="nav-link px-4 py-2 rounded-lg font-medium <?= $currentPage === 'services' ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">Services</a></li>
-                <li><a href="<?= BASE_URL ?>/contact.php" class="nav-link px-4 py-2 rounded-lg font-medium <?= $currentPage === 'contact' ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">Contact</a></li>
-                <li><a href="<?= BASE_URL ?>/payment.php" class="nav-link px-4 py-2 rounded-lg font-medium <?= $currentPage === 'payment' ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">Payment</a></li>
+                <li><a href="/index.php" class="nav-link px-4 py-2 rounded-lg font-medium <?= $currentPage === 'index' ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">Home</a></li>
+                <li><a href="/about.php" class="nav-link px-4 py-2 rounded-lg font-medium <?= $currentPage === 'about' ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">About</a></li>
+                <li><a href="/services.php" class="nav-link px-4 py-2 rounded-lg font-medium <?= $currentPage === 'services' ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">Services</a></li>
+                <li><a href="/contact.php" class="nav-link px-4 py-2 rounded-lg font-medium <?= $currentPage === 'contact' ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">Contact</a></li>
+                <li><a href="/payment.php" class="nav-link px-4 py-2 rounded-lg font-medium <?= $currentPage === 'payment' ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">Payment</a></li>
                 <?php if ($user): ?>
-                <li><a href="<?= BASE_URL ?>/dashboard/" class="nav-link px-4 py-2 rounded-lg font-medium <?= $currentPage === 'dashboard' ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">Dashboard</a></li>
+                <li><a href="/dashboard/" class="nav-link px-4 py-2 rounded-lg font-medium <?= $currentPage === 'dashboard' ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">Dashboard</a></li>
                 <?php if (isAdmin()): ?>
-                <li><a href="<?= BASE_URL ?>/admin/" class="nav-link px-4 py-2 rounded-lg font-medium <?= strpos($_SERVER['REQUEST_URI'], '/admin') !== false ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">Admin</a></li>
+                <li><a href="/admin/" class="nav-link px-4 py-2 rounded-lg font-medium <?= strpos($_SERVER['REQUEST_URI'], '/admin') !== false ? 'text-primary bg-primary/10' : 'text-slate-600 hover:text-primary hover:bg-slate-100' ?>">Admin</a></li>
                 <?php endif; ?>
-                <li><a href="<?= BASE_URL ?>/logout.php" class="nav-link px-4 py-2 rounded-lg font-medium text-slate-600 hover:text-red-600">Logout</a></li>
+                <li><a href="/logout.php" class="nav-link px-4 py-2 rounded-lg font-medium text-slate-600 hover:text-red-600">Logout</a></li>
                 <?php else: ?>
-                <li><a href="<?= BASE_URL ?>/request-service.php" class="nav-link-cta ml-2 px-5 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary-dark">Request Service</a></li>
-                <li><a href="<?= BASE_URL ?>/login.php" class="nav-link px-4 py-2 rounded-lg font-medium text-slate-600 hover:text-primary hover:bg-slate-100">Login</a></li>
+                <li><a href="/request-service.php" class="nav-link-cta ml-2 px-5 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary-dark">Request Service</a></li>
+                <li><a href="/login.php" class="nav-link px-4 py-2 rounded-lg font-medium text-slate-600 hover:text-primary hover:bg-slate-100">Login</a></li>
                 <?php endif; ?>
             </ul>
 
@@ -39,18 +39,18 @@ $user = currentUser();
 
     <div id="mobile-nav" class="hidden md:hidden border-t border-slate-200 bg-white/95">
         <ul class="px-4 py-4 space-y-1">
-            <li><a href="<?= BASE_URL ?>/index.php" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Home</a></li>
-            <li><a href="<?= BASE_URL ?>/about.php" class="block px-4 py-3 rounded-lg font-medium text-slate-600">About</a></li>
-            <li><a href="<?= BASE_URL ?>/services.php" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Services</a></li>
-            <li><a href="<?= BASE_URL ?>/contact.php" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Contact</a></li>
-            <li><a href="<?= BASE_URL ?>/payment.php" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Payment</a></li>
+            <li><a href="/index.php" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Home</a></li>
+            <li><a href="/about.php" class="block px-4 py-3 rounded-lg font-medium text-slate-600">About</a></li>
+            <li><a href="/services.php" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Services</a></li>
+            <li><a href="/contact.php" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Contact</a></li>
+            <li><a href="/payment.php" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Payment</a></li>
             <?php if ($user): ?>
-            <li><a href="<?= BASE_URL ?>/dashboard/" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Dashboard</a></li>
-            <?php if (isAdmin()): ?><li><a href="<?= BASE_URL ?>/admin/" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Admin</a></li><?php endif; ?>
-            <li><a href="<?= BASE_URL ?>/logout.php" class="block px-4 py-3 rounded-lg font-medium text-red-600">Logout</a></li>
+            <li><a href="/dashboard/" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Dashboard</a></li>
+            <?php if (isAdmin()): ?><li><a href="/admin/" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Admin</a></li><?php endif; ?>
+            <li><a href="/logout.php" class="block px-4 py-3 rounded-lg font-medium text-red-600">Logout</a></li>
             <?php else: ?>
-            <li><a href="<?= BASE_URL ?>/request-service.php" class="block mx-4 mt-4 py-3.5 rounded-xl font-semibold text-center text-white bg-primary">Request Service</a></li>
-            <li><a href="<?= BASE_URL ?>/login.php" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Login</a></li>
+            <li><a href="/request-service.php" class="block mx-4 mt-4 py-3.5 rounded-xl font-semibold text-center text-white bg-primary">Request Service</a></li>
+            <li><a href="/login.php" class="block px-4 py-3 rounded-lg font-medium text-slate-600">Login</a></li>
             <?php endif; ?>
         </ul>
     </div>
