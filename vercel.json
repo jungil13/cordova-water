@@ -1,56 +1,13 @@
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "*.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "admin/*.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "auth/*.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "dashboard/*.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "api/*.php",
-      "use": "vercel-php@0.7.2"
-    }
-  ],
-  "routes": [
-    { "handle": "filesystem" },
-    {
-      "src": "/",
-      "dest": "/index.php"
-    },
-    {
-      "src": "/admin",
-      "dest": "/admin/index.php"
-    },
-    {
-      "src": "/admin/(.*)",
-      "dest": "/admin/$1"
-    },
-    {
-      "src": "/dashboard",
-      "dest": "/dashboard/index.php"
-    },
-    {
-      "src": "/auth/(.*)",
-      "dest": "/auth/$1"
-    },
-    {
-      "src": "/(.*)\\.php",
-      "dest": "/$1.php"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ]
-}
+"routes": [
+  { "handle": "filesystem" },
+
+  { "src": "^/$", "dest": "/index.php" },
+
+  { "src": "^/admin$", "dest": "/admin/index.php" },
+  { "src": "^/dashboard$", "dest": "/dashboard/index.php" },
+
+  { "src": "^/auth/(.*)", "dest": "/auth/$1" },
+  { "src": "^/api/(.*)", "dest": "/api/$1" },
+
+  { "src": "^/(.*)\\.php$", "dest": "/$1.php" }
+]
