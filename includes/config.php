@@ -38,12 +38,12 @@ function env($key, $default = null)
 define('BASE_URL', env('BASE_URL', 'http://localhost:8000'));
 define('SOCKET_URL', env('SOCKET_URL', 'http://localhost:3000'));
 
-// Database
-define('DB_HOST', env('DB_HOST', 'localhost'));
-define('DB_PORT', env('DB_PORT', '3306'));
-define('DB_NAME', env('DB_NAME', 'cordova_water'));
-define('DB_USER', env('DB_USER', 'root'));
-define('DB_PASS', env('DB_PASS', ''));
+// Database (supports local .env and Railway-style MYSQL_* vars)
+define('DB_HOST', env('DB_HOST', env('MYSQLHOST', 'localhost')));
+define('DB_PORT', env('DB_PORT', env('MYSQLPORT', '3306')));
+define('DB_NAME', env('DB_NAME', env('MYSQLDATABASE', env('MYSQL_DATABASE', 'cordova_water'))));
+define('DB_USER', env('DB_USER', env('MYSQLUSER', 'root')));
+define('DB_PASS', env('DB_PASS', env('MYSQLPASSWORD', '')));
 
 // Google OAuth
 define('GOOGLE_CLIENT_ID', env('GOOGLE_CLIENT_ID', ''));
