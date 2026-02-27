@@ -72,28 +72,28 @@
         <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">What We Do</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="overflow-hidden rounded-2xl shadow-lg group">
-                <img src="images/about-page/1.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                <img src="/images/about-page/1.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
             </div>
             <div class="overflow-hidden rounded-2xl shadow-lg group">
-                <img src="images/about-page/2.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                <img src="/images/about-page/2.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
             </div>
             <div class="overflow-hidden rounded-2xl shadow-lg group">
-                <img src="images/about-page/3.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                <img src="/images/about-page/3.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
             </div>
             <div class="overflow-hidden rounded-2xl shadow-lg group">
-                <img src="images/about-page/4.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                <img src="/images/about-page/4.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
             </div>
             <div class="overflow-hidden rounded-2xl shadow-lg group">
-                <img src="images/about-page/5.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                <img src="/images/about-page/5.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
             </div>
             <div class="overflow-hidden rounded-2xl shadow-lg group">
-                <img src="images/about-page/6.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                <img src="/images/about-page/6.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
             </div>
             <div class="overflow-hidden rounded-2xl shadow-lg group">
-                <img src="images/about-page/7.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                <img src="/images/about-page/7.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
             </div>
             <div class="overflow-hidden rounded-2xl shadow-lg group">
-                <img src="images/about-page/8.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                <img src="/images/about-page/8.png" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
             </div>
         </div>
     </div>
