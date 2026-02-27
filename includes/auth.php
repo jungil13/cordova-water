@@ -1,9 +1,11 @@
 <?php
-// Start session at the absolute top to prevent "headers already sent"
+// Start session safely; avoid warnings if headers were already sent (e.g. by Vercel)
 if (session_status() === PHP_SESSION_NONE) {
-    // Default session lifetime (7 days)
-    session_set_cookie_params(['lifetime' => 604800, 'path' => '/', 'samesite' => 'Lax']);
-    session_start();
+    if (!headers_sent()) {
+        // Default session lifetime (7 days)
+        session_set_cookie_params(['lifetime' => 604800, 'path' => '/', 'samesite' => 'Lax']);
+    }
+    @session_start();
 }
 
 /**
