@@ -1,31 +1,27 @@
 <?php
-// Login entrypoint - no output before this PHP block to keep headers/redirects safe.
-require_once __DIR__ . '/includes/auth.php';
-require_once __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/db.php';
 
-if (isLoggedIn()) {
-    header('Location: ' . BASE_URL . '/dashboard/');
-    exit;
-}
+// On Vercel, PHP sessions are not reliable between requests, so we avoid
+// hard redirects here and instead render a generic dashboard for guests.
+$user = currentUser();
+$requests = $billing = $payments = [];
 
-$loginError = null;
+if ($user) {
+    // User's service requests
+    $stmt = $pdo->prepare("SELECT * FROM service_requests WHERE user_id = ? ORDER BY created_at DESC LIMIT 10");
+    $stmt->execute([$user['id']]);
+    $requests = $stmt->fetchAll();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
-    if ($email && $password) {
-        $user = loginUser($email, $password);
-        if ($user) {
-            $redirect = $_SESSION['redirect_after_login'] ?? BASE_URL . '/dashboard/';
-            unset($_SESSION['redirect_after_login']);
-            header('Location: ' . $redirect);
-            exit;
-        } else {
-            $loginError = 'Invalid email or password.';
-        }
-    } else {
-        $loginError = 'Please enter both email and password.';
-    }
+    // User's billing
+    $stmt = $pdo->prepare("SELECT * FROM billing WHERE user_id = ? ORDER BY period_end DESC LIMIT 5");
+    $stmt->execute([$user['id']]);
+    $billing = $stmt->fetchAll();
+
+    // User's payments
+    $stmt = $pdo->prepare("SELECT p.*, b.period_end FROM payments p LEFT JOIN billing b ON p.billing_id = b.id WHERE p.user_id = ? ORDER BY p.created_at DESC LIMIT 5");
+    $stmt->execute([$user['id']]);
+    $payments = $stmt->fetchAll();
 }
 ?>
 <!DOCTYPE html>
@@ -33,59 +29,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Cordova Water System Inc.</title>
+    <title>Dashboard - Cordova Water System Inc.</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Plus Jakarta Sans']},colors:{primary:{DEFAULT:'#0A4D68',dark:'#083A4D'}}}}}</script>
-    <style>
-        .auth-bg {
-            background-image: linear-gradient(rgba(10, 77, 104, 0.8), rgba(8, 58, 77, 0.9)), url('images/background.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-    </style>
 </head>
-<body class="font-sans antialiased auth-bg min-h-screen flex items-center justify-center p-4">
-    <div class="w-full max-w-md">
-        <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-white/20">
-            <div class="text-center mb-8">
-                <a href="<?= BASE_URL ?>/" class="inline-block text-2xl font-bold text-primary mb-4">Cordova Water System Inc.</a>
-                <h1 class="text-xl font-bold text-slate-900">Sign in to your account</h1>
-                <p class="text-slate-600 text-sm mt-1">Enter your credentials to continue</p>
-            </div>
+<body class="font-sans antialiased text-slate-800 bg-slate-50">
+<?php include __DIR__ . '/../includes/header.php'; ?>
 
-            <?php if ($loginError): ?>
-            <div class="mb-4 p-4 rounded-xl bg-red-50 border border-red-100 text-red-700 text-sm flex items-center gap-2">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
-                <?= htmlspecialchars($loginError) ?>
-            </div>
-            <?php endif; ?>
-
-            <form method="POST" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
-                    <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="name@example.com" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
-                    <input type="password" name="password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="••••••••">
-                </div>
-                <button type="submit" class="w-full py-3 px-4 rounded-xl font-semibold text-white bg-primary hover:bg-primary-dark shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
-                    Sign in
-                </button>
-            </form>
-
-            <div class="mt-8 pt-6 border-t border-slate-100 text-center">
-                <p class="text-slate-600 text-sm">Don't have an account? <a href="register.php" class="text-primary font-bold hover:underline">Register here</a></p>
-            </div>
+<section class="pt-32 pb-24">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-slate-900">
+                <?= $user ? 'Welcome back, ' . htmlspecialchars(explode(' ', $user['name'])[0]) . '!' : 'Customer Dashboard' ?>
+            </h1>
+            <p class="text-slate-600 mt-1">
+                <?= $user ? 'Manage your water service and billing.' : 'Sign in to see your requests, billing, and payments.' ?>
+            </p>
         </div>
 
-        <p class="text-center mt-6">
-            <a href="<?= BASE_URL ?>/" class="text-white/80 hover:text-white transition-colors text-sm flex items-center justify-center gap-2">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                Back to home
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+            <a href="<?= BASE_URL ?>/request-service.php" class="block p-6 rounded-2xl bg-white border border-slate-100 hover:border-primary/30 hover:shadow-xl transition-all">
+                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                </div>
+                <h2 class="font-bold text-slate-900">New Service Request</h2>
+                <p class="text-slate-600 text-sm mt-1">Submit a request for water service</p>
             </a>
-        </p>
+            <a href="<?= BASE_URL ?>/payment.php" class="block p-6 rounded-2xl bg-white border border-slate-100 hover:border-primary/30 hover:shadow-xl transition-all">
+                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                </div>
+                <h2 class="font-bold text-slate-900">Pay Bill</h2>
+                <p class="text-slate-600 text-sm mt-1">Pay your water bill online</p>
+            </a>
+            <a href="<?= BASE_URL ?>/contact.php" class="block p-6 rounded-2xl bg-white border border-slate-100 hover:border-primary/30 hover:shadow-xl transition-all">
+                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <h2 class="font-bold text-slate-900">Contact Us</h2>
+                <p class="text-slate-600 text-sm mt-1">Get in touch with our team</p>
+            </a>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+                    <h2 class="font-bold text-slate-900">Service Requests</h2>
+                    <a href="<?= BASE_URL ?>/request-service.php" class="text-primary text-sm font-medium hover:underline">New Request</a>
+                </div>
+                <div class="divide-y divide-slate-100">
+                    <?php if (empty($requests)): ?>
+                    <div class="p-8 text-center text-slate-500">No service requests yet. <a href="<?= BASE_URL ?>/request-service.php" class="text-primary hover:underline">Submit one</a></div>
+                    <?php else: foreach ($requests as $r): ?>
+                    <div class="p-4 flex items-center justify-between">
+                        <div>
+                            <p class="font-medium text-slate-900"><?= htmlspecialchars($r['service_type']) ?></p>
+                            <p class="text-sm text-slate-500"><?= date('M j, Y', strtotime($r['created_at'])) ?></p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium <?= $r['status'] === 'completed' ? 'bg-green-100 text-green-700' : ($r['status'] === 'in_progress' ? 'bg-amber-100 text-amber-700' : 'bg-slate-100 text-slate-700') ?>"><?= ucfirst(str_replace('_', ' ', $r['status'])) ?></span>
+                    </div>
+                    <?php endforeach; endif; ?>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+                <div class="p-6 border-b border-slate-100">
+                    <h2 class="font-bold text-slate-900">Recent Billing</h2>
+                </div>
+                <div class="divide-y divide-slate-100">
+                    <?php if (empty($billing)): ?>
+                    <div class="p-8 text-center text-slate-500">No billing records yet.</div>
+                    <?php else: foreach ($billing as $b): ?>
+                    <div class="p-4 flex items-center justify-between">
+                        <div>
+                            <p class="font-medium text-slate-900"><?= date('M Y', strtotime($b['period_end'])) ?></p>
+                            <p class="text-sm text-slate-500"><?= $b['consumption_cbm'] ?> m³</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-primary">₱<?= number_format($b['amount'], 2) ?></p>
+                            <span class="text-xs <?= $b['status'] === 'paid' ? 'text-green-600' : 'text-amber-600' ?>"><?= ucfirst($b['status']) ?></span>
+                        </div>
+                    </div>
+                    <?php endforeach; endif; ?>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
+
+<script src="<?= BASE_URL ?>/js/main.js"></script>
+<script>const h=document.getElementById('main-header');window.addEventListener('scroll',()=>h?.classList.toggle('scrolled',window.scrollY>50));</script>
 </body>
 </html>
