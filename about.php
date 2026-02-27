@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/includes/auth.php'; ?>
+﻿<?php require_once __DIR__ . '/includes/auth.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,12 +67,45 @@
         </div>
     </div>
 </section>
+<section class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">What We Do</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="overflow-hidden rounded-2xl shadow-lg group">
+                <img src="images/about-page/0aef5c6e-a75f-4435-a1f9-5ec93a83c415.jfif" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-lg group">
+                <img src="images/about-page/3f5c4d01-f1d9-49ee-bf48-2e4ce5af8bcb.jfif" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-lg group">
+                <img src="images/about-page/615ab07d-4b81-4c8c-b117-276a2aa068c7.jfif" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-lg group">
+                <img src="images/about-page/6ec93be4-846d-484e-824b-17c38aad8540.jfif" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-lg group">
+                <img src="images/about-page/9eec5991-f61c-4d87-8273-e1f5db0396a5.jfif" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-lg group">
+                <img src="images/about-page/d2535bb8-0d07-46c7-b618-84e97dcda426.jfif" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-lg group">
+                <img src="images/about-page/da72d666-017f-4807-a723-3bd018203e35.jfif" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-lg group">
+                <img src="images/about-page/f45ea0d7-9b39-41ed-9a86-6ebaf9e42e06.jfif" alt="CWSI Action" class="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110">
+            </div>
+        </div>
+    </div>
+</section>
+
 <footer class="bg-slate-900 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
         <span class="font-bold text-lg">Cordova Water System Inc.</span>
-        <p class="text-slate-400 text-sm">© 2026 Cordova Water System Inc. All Rights Reserved.</p>
+        <p class="text-slate-400 text-sm">Â© 2026 Cordova Water System Inc. All Rights Reserved.</p>
     </div>
 </footer>
 <script src="<?= BASE_URL ?>/js/main.js"></script>
 </body>
 </html>
+
