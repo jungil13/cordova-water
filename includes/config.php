@@ -36,6 +36,7 @@ function env($key, $default = null)
 
 // App Settings
 define('BASE_URL', env('BASE_URL', 'http://localhost:8000'));
+define('SOCKET_URL', env('SOCKET_URL', 'http://localhost:3000'));
 
 // Database
 define('DB_HOST', env('DB_HOST', 'localhost'));
