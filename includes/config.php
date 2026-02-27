@@ -35,7 +35,11 @@ function env($key, $default = null)
 }
 
 // App Settings
-define('BASE_URL', env('BASE_URL', 'http://localhost:8000'));
+// If BASE_URL is not provided in env, build it from the current host so it works on Vercel/Aiven/etc.
+$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$host   = $_SERVER['HTTP_HOST'] ?? 'localhost:8000';
+$defaultBaseUrl = $scheme . '://' . $host;
+define('BASE_URL', env('BASE_URL', $defaultBaseUrl));
 define('SOCKET_URL', env('SOCKET_URL', 'http://localhost:3000'));
 
 // Database (supports local .env and Railway-style MYSQL_* vars)
